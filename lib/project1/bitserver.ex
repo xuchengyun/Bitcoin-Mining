@@ -24,17 +24,16 @@ defmodule PROJECT1.Bitserver do
   end
 
   def connectloop(no_zero) do
-			receive do
-				{:request, pid} ->
-					msg = {:zeronum, no_zero}
-					send pid, msg
-					connectloop(no_zero)
-				{:bitcoin, msg} ->
-					IO.puts msg
-					connectloop(no_zero)
-			end
-		
-	end
+    receive do
+      {:request, pid} ->
+	msg = {:zeronum, no_zero}
+	send pid, msg
+	connectloop(no_zero)
+      {:bitcoin, msg} ->
+	IO.puts msg
+	connectloop(no_zero)
+    end
+  end
 
   def findcoin(no_of_workers, no_zero) do
     caller = self
